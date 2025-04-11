@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background: #f9f9f9;
+  }
+  input, label, button {
+    display: block;
+    margin: 10px 0;
+    padding: 8px;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .card {
+    background: white;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    width: 220px;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 8px;
+  }
+  .card img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+  }
+  .bairro {
+    margin-bottom: 40px;
+  }
+  

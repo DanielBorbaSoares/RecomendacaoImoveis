@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Imóveis Recomendados</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>Recomendações de Imóveis</h1>
+  {% for bairro, imoveis in bairros.items() %}
+    <h2>{{ bairro }}</h2>
+    <div class="bairro">
+      {% for imovel in imoveis %}
+        <div class="card">
+          <img src="/static/uploads/{{ imovel['imagem'] }}" alt="Imagem do Imóvel">
+          <h3>{{ imovel['titulo'] }}</h3>
+          <p>Preço: {{ imovel['preco'] }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</body>
+</html>
