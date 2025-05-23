@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
-# Página inicial (cliente)
+# Página inicial (cliente) → corretor vê os imóveis
 @app.route('/cliente')
 def cliente():
     imoveis = []
@@ -24,7 +24,7 @@ def cliente():
             bairros[bairro].append(imovel)
     return render_template('cliente.html', bairros=bairros)
 
-# Página do corretor
+# Página do corretor → cadastrar imóveis
 @app.route('/corretor', methods=['GET', 'POST'])
 def corretor():
     if request.method == 'POST':
@@ -43,6 +43,28 @@ def corretor():
         return redirect('/corretor')
     return render_template('corretor.html')
 
+# Nova página → formulário para o cliente preencher preferências
+@app.route('/formulariocliente', methods=['GET', 'POST'])
+def formulariocliente():
+    mensagem = ''
+    if request.method == 'POST':
+        bairro = request.form['bairro']
+        preco_max = request.form['preco_max']
+        quartos = request.form['quartos']
+        aceita_pets = 'sim' if request.form.get('aceita_pets') else 'nao'
+
+        # Salva as preferências no arquivo
+        with open('preferencias.csv', 'a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            if os.path.getsize('preferencias.csv') == 0:
+                writer.writerow(['bairro', 'preco_max', 'quartos', 'aceita_pets'])
+            writer.writerow([bairro, preco_max, quartos, aceita_pets])
+
+        mensagem = 'Obrigado! Suas preferências foram registradas.'
+
+    return render_template('formulariocliente.html', mensagem=mensagem)
+
+
 # Página de sucesso ao treinar
 @app.route('/treinar')
 def treinar():
@@ -51,9 +73,6 @@ def treinar():
 if __name__ == '__main__':
     if not os.path.exists('static/uploads'):
         os.makedirs('static/uploads')
-    
-    import os
+
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
-
-

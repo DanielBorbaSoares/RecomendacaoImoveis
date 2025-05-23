@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de Preferências</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>Informe suas preferências para recomendação:</h1>
+
+  <form method="POST">
+    <label for="bairro">Bairro preferido:</label>
+    <input type="text" name="bairro" required><br>
+
+    <label for="preco_max">Preço máximo:</label>
+    <input type="number" name="preco_max" required><br>
+
+    <label for="quartos">Número mínimo de quartos:</label>
+    <input type="number" name="quartos" required><br>
+
+    <label for="aceita_pets">Aceita pets:</label>
+    <input type="checkbox" name="aceita_pets"><br><br>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  {% if mensagem %}
+    <p style="color: green;">{{ mensagem }}</p>
+  {% endif %}
+</body>
+</html>
