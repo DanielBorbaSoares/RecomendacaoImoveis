@@ -2,25 +2,57 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Painel do Corretor</title>
+  <title>Cadastrar Imóvel</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <h1>Cadastro de Imóveis</h1>
-  <form action="/corretor" method="POST" enctype="multipart/form-data">
+  <h1>Cadastrar Novo Imóvel</h1>
+
+  <form method="POST" enctype="multipart/form-data">
+    <label for="tipo">Tipo:</label>
+    <select name="tipo" required>
+      <option value="Venda">Venda</option>
+      <option value="Aluguel">Aluguel</option>
+    </select>
+
     <label for="titulo">Título:</label>
-    <input type="text" name="titulo" required><br>
+    <input type="text" name="titulo" required>
+
+    <label for="cidade">Cidade:</label>
+    <input type="text" name="cidade" required>
+
     <label for="bairro">Bairro:</label>
-    <input type="text" name="bairro" required><br>
-    <label for="preco">Preço:</label>
-    <input type="text" name="preco" required><br>
-    <label for="imagem">Imagem:</label>
-    <input type="file" name="imagem" required><br><br>
-    <button type="submit">Adicionar Imóvel</button>
+    <input type="text" name="bairro" required>
+
+    <label for="quartos">Quartos:</label>
+    <input type="number" name="quartos" required>
+
+    <label for="vagas">Vagas de Estacionamento:</label>
+    <input type="number" name="vagas" required>
+
+    <label for="area">Área (m²):</label>
+    <input type="number" name="area" required>
+
+    <label for="aceita_pets">Aceita Pets:</label>
+    <input type="checkbox" name="aceita_pets"><br>
+
+    <label for="valor_condominio">Valor Condomínio (R$):</label>
+    <input type="number" name="valor_condominio">
+
+    <label for="valor_aluguel">Valor Aluguel (R$):</label>
+    <input type="number" name="valor_aluguel">
+
+    <label for="valor_compra">Valor Compra (R$):</label>
+    <input type="number" name="valor_compra">
+
+    <label for="fotos">Fotos do Imóvel:</label>
+    <input type="file" name="fotos" multiple>
+
+    <button type="submit">Cadastrar Imóvel</button>
   </form>
 
-  <br><a href="/treinar"><button>Treinar Recomendação</button></a>
-  <br><a href="/cliente">Ver imoveis cadastrados </a>
-  <br><a href="/formulariocliente">Ver formulário do cliente</a>
+  <br>
+  <a href="/imoveiscadastrados"><button>Ver Imóveis Cadastrados</button></a>
+  <a href="/treinar"><button>Treinar IA (KNN)</button></a>
 </body>
 </html>

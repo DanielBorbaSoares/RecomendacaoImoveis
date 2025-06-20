@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Imóveis Cadastrados</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>Imóveis Cadastrados</h1>
+
+  <h2>Venda</h2>
+  {% for index, imovel in venda %}
+    <div class="card">
+      <h3>{{ imovel['titulo'] }}</h3>
+      <p><strong>Cidade:</strong> {{ imovel['cidade'] }}</p>
+      <p><strong>Bairro:</strong> {{ imovel['bairro'] }}</p>
+      <p><strong>Quartos:</strong> {{ imovel['quartos'] }}</p>
+      <p><strong>Vagas:</strong> {{ imovel['vagas'] }}</p>
+      <p><strong>Área:</strong> {{ imovel['area'] }} m²</p>
+      <p><strong>Valor Compra:</strong> R$ {{ imovel['valor_compra'] }}</p>
+      {% if imovel['fotos'] %}
+        <img src="/static/uploads/{{ imovel['fotos'].split(';')[0] }}" alt="Foto do imóvel">
+      {% endif %}
+      <br>
+      <a href="/excluir_imovel/{{ index }}"><button>Excluir</button></a>
+    </div>
+  {% endfor %}
+
+  <h2>Aluguel</h2>
+  {% for index, imovel in aluguel %}
+    <div class="card">
+      <h3>{{ imovel['titulo'] }}</h3>
+      <p><strong>Cidade:</strong> {{ imovel['cidade'] }}</p>
+      <p><strong>Bairro:</strong> {{ imovel['bairro'] }}</p>
+      <p><strong>Quartos:</strong> {{ imovel['quartos'] }}</p>
+      <p><strong>Vagas:</strong> {{ imovel['vagas'] }}</p>
+      <p><strong>Área:</strong> {{ imovel['area'] }} m²</p>
+      <p><strong>Valor Aluguel:</strong> R$ {{ imovel['valor_aluguel'] }}</p>
+      {% if imovel['fotos'] %}
+        <img src="/static/uploads/{{ imovel['fotos'].split(';')[0] }}" alt="Foto do imóvel">
+      {% endif %}
+      <br>
+      <a href="/excluir_imovel/{{ index }}"><button>Excluir</button></a>
+    </div>
+  {% endfor %}
+
+  <br>
+  <a href="/corretor"><button>Voltar para Cadastro</button></a>
+  <a href="/treinar"><button>Treinar IA (KNN)</button></a>
+</body>
+</html>

@@ -2,30 +2,59 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Formulário de Preferências</title>
+  <title>Formulário de Preferências do Cliente</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <h1>Informe suas preferências para recomendação:</h1>
 
   <form method="POST">
-    <label for="bairro">Bairro preferido:</label>
-    <input type="text" name="bairro" required><br>
+    <label for="tipo">Tipo:</label>
+    <select name="tipo" required>
+      <option value="Venda">Venda</option>
+      <option value="Aluguel">Aluguel</option>
+    </select>
 
-    <label for="preco_max">Preço máximo:</label>
-    <input type="number" name="preco_max" required><br>
+    <label for="cidade">Cidade:</label>
+    <input type="text" name="cidade" required>
 
-    <label for="quartos">Número mínimo de quartos:</label>
-    <input type="number" name="quartos" required><br>
+    <label for="bairro">Bairro:</label>
+    <input type="text" name="bairro" required>
 
-    <label for="aceita_pets">Aceita pets:</label>
-    <input type="checkbox" name="aceita_pets"><br><br>
+    <label for="quartos">Mínimo de Quartos:</label>
+    <input type="number" name="quartos" required>
 
-    <button type="submit">Enviar</button>
+    <label for="vagas">Mínimo de Vagas:</label>
+    <input type="number" name="vagas" required>
+
+    <label for="area">Área mínima (m²):</label>
+    <input type="number" name="area" required>
+
+    <label for="aceita_pets">Aceita Pets:</label>
+    <input type="checkbox" name="aceita_pets"><br>
+
+    <button type="submit">Buscar Imóveis</button>
   </form>
 
-  {% if mensagem %}
-    <p style="color: green;">{{ mensagem }}</p>
+  {% if recomendacoes %}
+    <h2>Imóveis Recomendados:</h2>
+    {% for imovel in recomendacoes %}
+      <div class="card">
+        <h3>{{ imovel['titulo'] }}</h3>
+        <p><strong>Tipo:</strong> {{ imovel['tipo'] }}</p>
+        <p><strong>Cidade:</strong> {{ imovel['cidade'] }}</p>
+        <p><strong>Bairro:</strong> {{ imovel['bairro'] }}</p>
+        <p><strong>Quartos:</strong> {{ imovel['quartos'] }}</p>
+        <p><strong>Vagas:</strong> {{ imovel['vagas'] }}</p>
+        <p><strong>Área:</strong> {{ imovel['area'] }} m²</p>
+        <p><strong>Valor Condomínio:</strong> R$ {{ imovel['valor_condominio'] }}</p>
+        <p><strong>Valor Aluguel:</strong> R$ {{ imovel['valor_aluguel'] }}</p>
+        <p><strong>Valor Compra:</strong> R$ {{ imovel['valor_compra'] }}</p>
+        {% if imovel['fotos'] %}
+          <img src="/static/uploads/{{ imovel['fotos'].split(';')[0] }}" alt="Foto do imóvel">
+        {% endif %}
+      </div>
+    {% endfor %}
   {% endif %}
 </body>
 </html>

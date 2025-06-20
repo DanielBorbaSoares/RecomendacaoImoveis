@@ -1,2 +1,2 @@
-titulo,bairro,preco,imagem
-Apartamento Porto Ibiza,Mario Quintana,"1400,00",Porto_Ibiza.png
+tipo,titulo,cidade,bairro,quartos,vagas,area,aceita_pets,valor_condominio,valor_aluguel,valor_compra,fotos
+Aluguel,Apartamento Porto Ibiza,Porto Alegre,Mario Quintana,2,1,44,Sim,400.00,1000.00,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
