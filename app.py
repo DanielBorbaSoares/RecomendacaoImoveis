@@ -1,12 +1,44 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 import csv
 import os
+import joblib
+import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+app.secret_key = 'chave-super-secreta'
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
-# Página do corretor
+# Usuário e senha simples
+USERNAME = 'admin'
+PASSWORD = '1234'
+
+# Página de login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != USERNAME or request.form['password'] != PASSWORD:
+            error = 'Usuário ou senha incorretos'
+        else:
+            session['logged_in'] = True
+            return redirect('/corretor')
+    return render_template('login.html', error=error)
+
+# Logout
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    return redirect('/login')
+
+# Proteger rotas
+@app.before_request
+def require_login():
+    if request.endpoint not in ('login', 'static', 'formulariocliente') and not session.get('logged_in'):
+        return redirect('/login')
+
+# Página do corretor (cadastrar imóveis)
 @app.route('/corretor', methods=['GET', 'POST'])
 def corretor():
     if request.method == 'POST':
@@ -17,43 +49,31 @@ def corretor():
         quartos = request.form['quartos']
         vagas = request.form['vagas']
         area = request.form['area']
-        aceita_pets = 'Sim' if request.form.get('aceita_pets') else 'Não'
+        aceita_pets = request.form.get('aceita_pets', 'Não')
         valor_condominio = request.form['valor_condominio']
         valor_aluguel = request.form['valor_aluguel']
         valor_compra = request.form['valor_compra']
-
         fotos = request.files.getlist('fotos')
-        foto_nomes = []
 
-        if not os.path.exists(app.config['UPLOAD_FOLDER']):
-            os.makedirs(app.config['UPLOAD_FOLDER'])
-
+        nomes_fotos = []
         for foto in fotos:
-            if foto.filename != '':
+            if foto and foto.filename:
                 filename = secure_filename(foto.filename)
-                foto_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                foto.save(foto_path)
-                foto_nomes.append(filename)
+                foto.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                nomes_fotos.append(filename)
 
         with open('imoveis.csv', 'a', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             if os.path.getsize('imoveis.csv') == 0:
-                writer.writerow([
-                    'tipo', 'titulo', 'cidade', 'bairro', 'quartos', 'vagas',
-                    'area', 'aceita_pets', 'valor_condominio',
-                    'valor_aluguel', 'valor_compra', 'fotos'
-                ])
-            writer.writerow([
-                tipo, titulo, cidade, bairro, quartos, vagas,
-                area, aceita_pets, valor_condominio,
-                valor_aluguel, valor_compra, ';'.join(foto_nomes)
-            ])
-
+                writer.writerow(['tipo', 'titulo', 'cidade', 'bairro', 'quartos', 'vagas', 'area', 'aceita_pets', 
+                                 'valor_condominio', 'valor_aluguel', 'valor_compra', 'fotos'])
+            writer.writerow([tipo, titulo, cidade, bairro, quartos, vagas, area, aceita_pets, 
+                             valor_condominio, valor_aluguel, valor_compra, ';'.join(nomes_fotos)])
         return redirect('/corretor')
 
     return render_template('corretor.html')
 
-# Página de visualização dos imóveis cadastrados (Venda / Aluguel)
+# Página imóveis cadastrados
 @app.route('/imoveiscadastrados')
 def imoveiscadastrados():
     imoveis = []
@@ -63,14 +83,8 @@ def imoveiscadastrados():
             for row in reader:
                 imoveis.append(row)
 
-    venda = []
-    aluguel = []
-
-    for index, imovel in enumerate(imoveis):
-        if imovel['tipo'] == 'Venda':
-            venda.append((index, imovel))
-        elif imovel['tipo'] == 'Aluguel':
-            aluguel.append((index, imovel))
+    venda = [(i, imovel) for i, imovel in enumerate(imoveis) if imovel['tipo'] == 'Venda']
+    aluguel = [(i, imovel) for i, imovel in enumerate(imoveis) if imovel['tipo'] == 'Aluguel']
 
     return render_template('imoveiscadastrados.html', venda=venda, aluguel=aluguel)
 
@@ -81,103 +95,99 @@ def excluir_imovel(index):
     if os.path.exists('imoveis.csv'):
         with open('imoveis.csv', newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
-            imoveis = list(reader)
+            for row in reader:
+                imoveis.append(row)
 
     if 0 <= index < len(imoveis):
         imoveis.pop(index)
-        with open('imoveis.csv', 'w', newline='', encoding='utf-8') as f:
-            writer = csv.DictWriter(f, fieldnames=[
-                'tipo', 'titulo', 'cidade', 'bairro', 'quartos', 'vagas',
-                'area', 'aceita_pets', 'valor_condominio',
-                'valor_aluguel', 'valor_compra', 'fotos'
-            ])
-            writer.writeheader()
-            writer.writerows(imoveis)
+
+    with open('imoveis.csv', 'w', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=['tipo', 'titulo', 'cidade', 'bairro', 'quartos', 'vagas', 'area', 
+                                               'aceita_pets', 'valor_condominio', 'valor_aluguel', 'valor_compra', 'fotos'])
+        writer.writeheader()
+        writer.writerows(imoveis)
 
     return redirect('/imoveiscadastrados')
 
-# Formulário do cliente + KNN
+# Formulário cliente (preferências)
 @app.route('/formulariocliente', methods=['GET', 'POST'])
 def formulariocliente():
-    recomendacoes = []
+    mensagem = None
+    recomendados = []
 
     if request.method == 'POST':
-        tipo = request.form['tipo']
-        cidade = request.form['cidade']
         bairro = request.form['bairro']
+        preco_max = float(request.form['preco_max'])
         quartos = int(request.form['quartos'])
-        vagas = int(request.form['vagas'])
-        area = int(request.form['area'])
-        aceita_pets = 'Sim' if request.form.get('aceita_pets') else 'Não'
+        aceita_pets = 'Sim' if request.form.get('aceita_pets') == 'on' else 'Não'
 
-        if os.path.exists('imoveis.csv') and os.path.exists('modelo_knn.joblib'):
-            import joblib
-            modelo_knn = joblib.load('modelo_knn.joblib')
+        if os.path.exists('modelo_knn.joblib'):
+            modelo = joblib.load('modelo_knn.joblib')
             scaler = joblib.load('scaler_knn.joblib')
             X_columns = joblib.load('X_columns_knn.joblib')
 
-            df = pd.read_csv('imoveis.csv')
-            features = ['quartos', 'vagas', 'area']
-            df_encoded = pd.get_dummies(df[['tipo', 'cidade', 'bairro', 'aceita_pets']])
-            X = pd.concat([df[features], df_encoded], axis=1)
-
-            input_dict = {
+            data_cliente = pd.DataFrame([{
+                'bairro': bairro,
+                'valor_aluguel': preco_max,
                 'quartos': quartos,
-                'vagas': vagas,
-                'area': area,
-                f'tipo_{tipo}': 1,
-                f'cidade_{cidade}': 1,
-                f'bairro_{bairro}': 1,
-                f'aceita_pets_{aceita_pets}': 1
-            }
+                'aceita_pets': aceita_pets
+            }])
 
-            input_data = []
-            for col in X_columns:
-                input_data.append(input_dict.get(col, 0))
+            data_cliente_encoded = pd.get_dummies(data_cliente).reindex(columns=X_columns, fill_value=0)
+            X_cliente_scaled = scaler.transform(data_cliente_encoded)
 
-            input_scaled = scaler.transform([input_data])
-            distances, indices = modelo_knn.kneighbors(input_scaled)
+            pred = modelo.kneighbors(X_cliente_scaled, n_neighbors=3, return_distance=False)
 
-            for idx in indices[0]:
-                recomendacoes.append(df.iloc[idx])
+            imoveis = []
+            with open('imoveis.csv', newline='', encoding='utf-8') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    imoveis.append(row)
 
-    return render_template('formulariocliente.html', recomendacoes=recomendacoes)
+            for i in pred[0]:
+                if i < len(imoveis):
+                    recomendados.append(imoveis[i])
 
-# Treinar KNN com clique
+            mensagem = "Imóveis recomendados para você:"
+        else:
+            mensagem = "Modelo não treinado. Clique em 'Treinar IA' no menu do corretor."
+
+    return render_template('formulariocliente.html', mensagem=mensagem, recomendados=recomendados)
+
+# Treinar o modelo (KNN)
 @app.route('/treinar')
 def treinar():
-    import pandas as pd
-    from sklearn.neighbors import NearestNeighbors
-    from sklearn.preprocessing import StandardScaler
-    import joblib
+    if os.path.exists('imoveis.csv'):
+        df = pd.read_csv('imoveis.csv')
 
-    if not os.path.exists('imoveis.csv'):
-        return "<h3>⚠️ Nenhum imóvel cadastrado!</h3><a href='/corretor'>Cadastrar imóveis</a>"
+        df = df[df['tipo'] == 'Aluguel']
 
-    df = pd.read_csv('imoveis.csv')
+        df['valor_aluguel'] = df['valor_aluguel'].fillna(0).astype(float)
+        df['quartos'] = df['quartos'].astype(int)
+        df['aceita_pets'] = df['aceita_pets'].fillna('Não')
 
-    features = ['quartos', 'vagas', 'area']
-    df_encoded = pd.get_dummies(df[['tipo', 'cidade', 'bairro', 'aceita_pets']])
-    X = pd.concat([df[features], df_encoded], axis=1)
+        X = df[['bairro', 'valor_aluguel', 'quartos', 'aceita_pets']]
+        y = df['bairro']
 
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
+        X_encoded = pd.get_dummies(X)
+        from sklearn.preprocessing import StandardScaler
+        scaler = StandardScaler()
+        X_scaled = scaler.fit_transform(X_encoded)
 
-    modelo_knn = NearestNeighbors(n_neighbors=5, metric='euclidean')
-    modelo_knn.fit(X_scaled)
+        modelo_knn = KNeighborsClassifier(n_neighbors=3)
+        modelo_knn.fit(X_scaled, y)
 
-    import joblib
-    joblib.dump(modelo_knn, 'modelo_knn.joblib')
-    joblib.dump(scaler, 'scaler_knn.joblib')
-    joblib.dump(X.columns, 'X_columns_knn.joblib')
+        joblib.dump(modelo_knn, 'modelo_knn.joblib')
+        joblib.dump(scaler, 'scaler_knn.joblib')
+        joblib.dump(X_encoded.columns.tolist(), 'X_columns_knn.joblib')
 
-    return "<h2>✅ Modelo KNN treinado com sucesso!</h2><a href='/imoveiscadastrados'>Voltar</a>"
+        return "<h2>Modelo treinado com sucesso!</h2><a href='/corretor'>Voltar</a>"
+    else:
+        return "<h2>Não existem imóveis cadastrados ainda.</h2><a href='/corretor'>Voltar</a>"
 
-# Rodar o app
+# Main
 if __name__ == '__main__':
     if not os.path.exists('static/uploads'):
         os.makedirs('static/uploads')
-
-    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)

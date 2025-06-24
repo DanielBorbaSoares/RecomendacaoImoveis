@@ -1,58 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Cadastrar Imóvel</title>
-  <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <title>Cadastrar Imóveis</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <h1>Cadastrar Novo Imóvel</h1>
 
-  <form method="POST" enctype="multipart/form-data">
-    <label for="tipo">Tipo:</label>
+<!-- MENU -->
+<nav style="background-color: #4CAF50; padding: 10px;">
+    <a href="/corretor" style="color: white; margin-right: 15px; text-decoration: none; font-weight: bold;">Cadastrar Imóveis</a>
+    <a href="/imoveiscadastrados" style="color: white; margin-right: 15px; text-decoration: none; font-weight: bold;">Imóveis Cadastrados</a>
+    <a href="/treinar" style="color: white; margin-right: 15px; text-decoration: none; font-weight: bold;">Treinar IA</a>
+    <a href="/formulariocliente" style="color: white; margin-right: 15px; text-decoration: none; font-weight: bold;">Formulário Cliente</a>
+    <a href="/logout" style="color: white; text-decoration: none; font-weight: bold;">Logout</a>
+</nav>
+
+<h1>Cadastrar Novo Imóvel</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    <label>Tipo:</label>
     <select name="tipo" required>
-      <option value="Venda">Venda</option>
-      <option value="Aluguel">Aluguel</option>
+        <option value="Venda">Venda</option>
+        <option value="Aluguel">Aluguel</option>
     </select>
 
-    <label for="titulo">Título:</label>
+    <label>Título:</label>
     <input type="text" name="titulo" required>
 
-    <label for="cidade">Cidade:</label>
+    <label>Cidade:</label>
     <input type="text" name="cidade" required>
 
-    <label for="bairro">Bairro:</label>
+    <label>Bairro:</label>
     <input type="text" name="bairro" required>
 
-    <label for="quartos">Quartos:</label>
+    <label>Quartos:</label>
     <input type="number" name="quartos" required>
 
-    <label for="vagas">Vagas de Estacionamento:</label>
+    <label>Vagas:</label>
     <input type="number" name="vagas" required>
 
-    <label for="area">Área (m²):</label>
+    <label>Área (m²):</label>
     <input type="number" name="area" required>
 
-    <label for="aceita_pets">Aceita Pets:</label>
-    <input type="checkbox" name="aceita_pets"><br>
+    <label>Aceita Pets:</label>
+    <input type="checkbox" name="aceita_pets">
 
-    <label for="valor_condominio">Valor Condomínio (R$):</label>
-    <input type="number" name="valor_condominio">
+    <label>Valor Condomínio:</label>
+    <input type="number" step="0.01" name="valor_condominio">
 
-    <label for="valor_aluguel">Valor Aluguel (R$):</label>
-    <input type="number" name="valor_aluguel">
+    <label>Valor Aluguel:</label>
+    <input type="number" step="0.01" name="valor_aluguel">
 
-    <label for="valor_compra">Valor Compra (R$):</label>
-    <input type="number" name="valor_compra">
+    <label>Valor Compra:</label>
+    <input type="number" step="0.01" name="valor_compra">
 
-    <label for="fotos">Fotos do Imóvel:</label>
+    <label>Fotos (pode selecionar múltiplas):</label>
     <input type="file" name="fotos" multiple>
 
-    <button type="submit">Cadastrar Imóvel</button>
-  </form>
+    <button type="submit">Cadastrar</button>
+</form>
 
-  <br>
-  <a href="/imoveiscadastrados"><button>Ver Imóveis Cadastrados</button></a>
-  <a href="/treinar"><button>Treinar IA (KNN)</button></a>
 </body>
 </html>
