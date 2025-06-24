@@ -18,9 +18,15 @@
       <p><strong>Vagas:</strong> {{ imovel['vagas'] }}</p>
       <p><strong>Área:</strong> {{ imovel['area'] }} m²</p>
       <p><strong>Valor Compra:</strong> R$ {{ imovel['valor_compra'] }}</p>
+
       {% if imovel['fotos'] %}
-        <img src="/static/uploads/{{ imovel['fotos'].split(';')[0] }}" alt="Foto do imóvel">
+        <div class="carousel">
+          {% for foto in imovel['fotos'].split(';') %}
+            <img src="/static/uploads/{{ foto }}" alt="Foto do imóvel">
+          {% endfor %}
+        </div>
       {% endif %}
+
       <br>
       <a href="/excluir_imovel/{{ index }}"><button>Excluir</button></a>
     </div>
@@ -36,9 +42,15 @@
       <p><strong>Vagas:</strong> {{ imovel['vagas'] }}</p>
       <p><strong>Área:</strong> {{ imovel['area'] }} m²</p>
       <p><strong>Valor Aluguel:</strong> R$ {{ imovel['valor_aluguel'] }}</p>
+
       {% if imovel['fotos'] %}
-        <img src="/static/uploads/{{ imovel['fotos'].split(';')[0] }}" alt="Foto do imóvel">
+        <div class="carousel">
+          {% for foto in imovel['fotos'].split(';') %}
+            <img src="/static/uploads/{{ foto }}" alt="Foto do imóvel">
+          {% endfor %}
+        </div>
       {% endif %}
+
       <br>
       <a href="/excluir_imovel/{{ index }}"><button>Excluir</button></a>
     </div>

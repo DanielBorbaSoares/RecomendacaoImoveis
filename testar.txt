@@ -1,0 +1,28 @@
+cd "C:\Users\danie\OneDrive\Área de Trabalho\RecomendacaoImoveis"
+python3.12 -m pip install -r requirements.txt
+python app.py
+
+
+
+🌐 Links para testar:
+Cadastrar imóvel (corretor):
+http://127.0.0.1:5000/corretor
+
+Treinar IA:
+http://127.0.0.1:5000/treinar
+
+Formulário de preferências (cliente):
+http://127.0.0.1:5000/formulariocliente
+
+Imóveis cadastrados:
+http://127.0.0.1:5000/imoveiscadastrados
+
+git status
+
+git add .
+
+git commit -m "Atualizações"
+
+git push origin master
+
+
