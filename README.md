@@ -85,8 +85,8 @@ python app.py
 http://localhost:5000/login
 ```
 
-**Usuário padrão:** `*****`  
-**Senha:** `*****`
+**Usuário padrão:** `admin`  
+**Senha:** `1234`
 
 ---
 
