@@ -75,8 +75,9 @@ O diferencial do sistema é o uso de **aprendizado de máquina (KNN - K-Nearest 
 # Instale as dependências
 pip install flask pandas scikit-learn joblib
 
-# Execute no terminal
-cd "C:\Users\danie\OneDrive\Área de Trabalho\RecomendacaoImoveis"
+# Execute no terminal , (edite local de aramzenamento)
+
+cd "C:\Users\danie\OneDrive\Área de Trabalho\RecomendacaoImoveis" *
 python3.12 -m pip install -r requirements.txt
 python app.py
 
