@@ -13,6 +13,13 @@ h1 {
     margin-top: 20px;
 }
 
+.titulo-central {
+  text-align: center;
+  margin-top: 2rem;
+  font-weight: bold;
+}
+
+
 form {
     max-width: 600px;
     margin: 20px auto;
