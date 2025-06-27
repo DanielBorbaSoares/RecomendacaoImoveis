@@ -92,7 +92,7 @@ http://localhost:5000/login
 
 ## **Link de Demonstração**
 
-🔗 https://recomendacaoimoveis.onrender.com
+🔗 https://recomendacaoimoveis.onrender.com/login
 
 ---
 
