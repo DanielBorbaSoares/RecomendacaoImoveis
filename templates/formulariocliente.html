@@ -6,7 +6,7 @@
   <title>Formulário de Preferências do Cliente</title>
   <link rel="stylesheet" href="/static/style.css">
   <style>
-    /* Para exibir as cards lado a lado */
+    /* Layout das cards lado a lado */
     .cards {
       display: flex;
       flex-wrap: wrap;
@@ -29,43 +29,71 @@
       margin-top: 0.5rem;
       border-radius: 4px;
     }
+    form label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    form input,
+    form select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      box-sizing: border-box;
+    }
+    form button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.75rem;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #45a049;
+    }
   </style>
 </head>
 <body>
-  <h1 style="text-align:center;">Informe suas preferências de imóvel</h1>
+  <h1 style="text-align:center; margin-top:2rem;">Informe suas preferências de imóvel</h1>
 
-  <form method="POST" style="max-width:400px;margin:0 auto;">
-    <label>Tipo:</label>
-    <select name="tipo" required>
+  <form method="POST" style="max-width:400px; margin:2rem auto;">
+    <label for="tipo">Tipo de imóvel:</label>
+    <select name="tipo" id="tipo" required>
       <option value="Aluguel">Alugar</option>
       <option value="Venda">Comprar</option>
-    </select><br>
+    </select>
 
-    <label>Bairro:</label>
-    <input type="text" name="bairro" required><br>
+    <label for="cidade">Cidade:</label>
+    <input type="text" name="cidade" id="cidade" required placeholder="Ex: Porto Alegre">
 
-    <label>Preço Máx (R$):</label>
-    <input type="number" name="preco_max" required><br>
+    <label for="bairro">Bairro:</label>
+    <input type="text" name="bairro" id="bairro" required placeholder="Ex: Mário Quintana">
 
-    <label>Quartos Mínimos:</label>
-    <input type="number" name="quartos" required><br>
+    <label for="preco_max">Preço Máx (R$):</label>
+    <input type="number" name="preco_max" id="preco_max" required min="0" step="0.01">
+
+    <label for="quartos">Quartos Mínimos:</label>
+    <input type="number" name="quartos" id="quartos" required min="0">
 
     <label>
-      <input type="checkbox" name="aceita_pets"> Aceita Pets
-    </label><br>
+      <input type="checkbox" name="aceita_pets" id="aceita_pets"> Aceita Pets
+    </label>
 
-    <button type="submit" style="width:100%;padding:0.75rem;background:#4CAF50;color:white;border:none;border-radius:6px;">
-      Buscar Imóveis
-    </button>
+    <button type="submit">Buscar Imóveis</button>
   </form>
 
   {% if recomendacoes is defined %}
     {% if recomendacoes %}
-      <h2 style="text-align:center;margin-top:2rem;">Imóveis Recomendados:</h2>
+      <h2 style="text-align:center; margin-top:2rem;">Imóveis Recomendados (até 3):</h2>
       <div class="cards">
         {% for im in recomendacoes %}
           <div class="card">
             <h3>{{ im['titulo'] }}</h3>
+            <p><strong>Cidade:</strong> {{ im['cidade'] }}</p>
             <p><strong>Bairro:</strong> {{ im['bairro'] }}</p>
             <p><strong>Quartos:</strong> {{ im['quartos'] }}</p>
             <p><strong>Vagas:</strong> {{ im['vagas'] }}</p>
@@ -85,7 +113,7 @@
         {% endfor %}
       </div>
     {% else %}
-      <p style="text-align:center;margin-top:2rem;">Nenhum imóvel encontrado com essas preferências.</p>
+      <p style="text-align:center; margin-top:2rem;">Nenhum imóvel encontrado com essas preferências.</p>
     {% endif %}
   {% endif %}
 </body>
