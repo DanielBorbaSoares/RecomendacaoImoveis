@@ -1,6 +1,61 @@
 tipo,titulo,cidade,bairro,quartos,vagas,area,aceita_pets,valor_condominio,valor_aluguel,valor_compra,fotos
-Aluguel,Apartamento Porto Ibiza,Porto Alegre,Mario Quintana,2,1,44,Sim,400.00,1000.00,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
-Aluguel,Apartamento MRV Porto Hortensias,Porto Alegre,Anchieta,2,1,44,Não,400.00,1100.00,,PortoHortensias-Piscina;PortoHortensias
-Venda,Apartamento MRV Porto Dos Sábias,Porto Alegre,Restinga,2,0,40,Sim,400.00,,200000.00,PortoDosSabias-Sala;PortoDosSabias-Churrasqueira;PortoDosSabias-Quarto;Fachada-PortoDosSabias.png
-Venda,Apartamento MRV Porto Montenegro,Porto Alegre,Jardim Planalto,3,1,53,Sim,500.00,,300000.00,PortoMontenegro_Planta.jpg;PortoMontenegro_Fachada.png
-Venda,Apartamento Tenda Ipanema Residence,Porto Alegre,Ipanema,2,1,40,on,350.00,,200000.00,Tenda-Ipanema-Estacionamento.png;Tenda-Ipanema-Planta.jpg;Tenda-Ipanema-Fachada.jpg
+Aluguel,Apartamento Porto Ibiza,Porto Alegre,Mario Quintana,2,1,44,Sim,400.0,1000.0,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Apartamento MRV Porto Hortensias,Porto Alegre,Anchieta,2,1,44,Não,400.0,1100.0,,PortoHortensias-Piscina;PortoHortensias
+Venda,Apartamento MRV Porto Dos Sábias,Porto Alegre,Restinga,2,0,40,Sim,400.0,,200000.0,PortoDosSabias-Sala;PortoDosSabias-Churrasqueira;PortoDosSabias-Quarto;Fachada-PortoDosSabias.png
+Venda,Apartamento MRV Porto Montenegro,Porto Alegre,Jardim Planalto,3,1,53,Sim,500.0,,300000.0,PortoMontenegro_Planta.jpg;PortoMontenegro_Fachada.png
+Venda,Apartamento Tenda Ipanema Residence,Porto Alegre,Ipanema,2,1,40,on,350.0,,200000.0,Tenda-Ipanema-Estacionamento.png;Tenda-Ipanema-Planta.jpg;Tenda-Ipanema-Fachada.jpg
+Aluguel,Apartamento Parque dos Pássaros,Porto Alegre,Sarandi,3,1,65,Sim,450.0,1450.0,,PortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Apartamento Vivendas do Sul,Porto Alegre,Cavalhada,2,1,55,Não,380.0,1200.0,,PortoHortensias;PortoHortensias-Piscina
+Aluguel,Apartamento Vila das Flores,Porto Alegre,Restinga,2,0,50,Sim,300.0,950.0,,PortoDosSabias-Sala;Fachada-PortoDosSabias.png
+Aluguel,Apartamento Bela Vista Tower,Porto Alegre,Bela Vista,1,1,35,Não,600.0,2000.0,,PortoMontenegro_Planta.jpg;PortoMontenegro_Fachada.png
+Aluguel,Apartamento Jardins de Ipanema,Porto Alegre,Ipanema,2,1,48,Sim,370.0,1100.0,,Tenda-Ipanema-Fachada.jpg;Tenda-Ipanema-Planta.jpg
+Aluguel,Apartamento Central Life,Porto Alegre,Centro,2,1,52,Sim,500.0,1300.0,,FachadaPortoIbiza.png;PortoIbiza.png
+Aluguel,Apartamento Econômico,Porto Alegre,Tristeza,3,0,65,Sim,450.1,2109.21,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Apartamento Econômico,Porto Alegre,Santa Tereza,2,1,64,Sim,509.9,1428.92,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Apartamento Econômico,Porto Alegre,Santa Tereza,4,0,68,Sim,659.33,2439.11,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Residencial Vista Sul,Porto Alegre,Azenha,4,1,70,Sim,579.68,1561.42,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Studio Compacto,Porto Alegre,Menino Deus,1,0,44,Sim,526.71,1089.58,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Residencial Vista Sul,Porto Alegre,Centro Histórico,3,2,47,Não,578.28,1547.25,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Apartamento Econômico,Porto Alegre,Passo D'Areia,3,2,70,Não,624.13,1334.05,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Apartamento Alto Padrão,Porto Alegre,Santa Tereza,2,1,49,Não,613.19,1190.07,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Condomínio Jardim Europa,Porto Alegre,Vila Nova,1,1,52,Não,594.49,1614.58,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Condomínio Jardim Europa,Porto Alegre,Petropolis,3,1,68,Não,394.59,2252.43,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Condomínio Jardim Europa,Porto Alegre,Centro Histórico,3,2,65,Não,418.78,1920.65,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Apartamento Econômico,Porto Alegre,Tristeza,1,2,74,Não,669.1,990.32,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Condomínio Jardim Europa,Porto Alegre,Cristal,2,2,61,Não,379.6,1178.38,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Condomínio Jardim Europa,Porto Alegre,Santa Tereza,2,2,79,Não,369.99,1165.34,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Residencial Vista Sul,Porto Alegre,Santa Tereza,3,2,43,Não,359.23,974.58,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Apartamento Econômico,Porto Alegre,Partenon,2,0,65,Não,490.3,1629.46,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Apartamento Econômico,Porto Alegre,Menino Deus,1,0,36,Não,400.56,1648.72,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Studio Compacto,Porto Alegre,Menino Deus,3,2,56,Sim,560.28,1089.82,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Apartamento Alto Padrão,Porto Alegre,Petropolis,1,0,42,Não,352.21,1879.62,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Apartamento Alto Padrão,Porto Alegre,Centro Histórico,4,0,62,Não,512.25,1818.88,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Studio Compacto,Porto Alegre,Tristeza,2,0,54,Sim,326.66,2089.48,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Aluguel,Residencial Vista Sul,Porto Alegre,Azenha,1,1,55,Não,382.31,2220.59,,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Econômico,Porto Alegre,Partenon,4,0,46,Sim,388.4,,199461.94,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Econômico,Porto Alegre,Partenon,2,2,64,Sim,590.13,,325901.1,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Studio Compacto,Porto Alegre,Centro Histórico,3,2,44,Não,484.45,,249646.37,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Residencial Vista Sul,Porto Alegre,Partenon,4,0,59,Sim,569.37,,431922.33,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Condomínio Jardim Europa,Porto Alegre,Santa Tereza,2,2,36,Sim,662.08,,252394.83,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Econômico,Porto Alegre,Passo D'Areia,3,2,54,Sim,631.22,,401562.22,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Alto Padrão,Porto Alegre,Cristal,4,0,77,Sim,581.16,,369977.95,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Residencial Vista Sul,Porto Alegre,Santa Tereza,4,2,64,Sim,486.0,,342993.77,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Residencial Vista Sul,Porto Alegre,Vila Nova,3,0,64,Não,314.81,,289778.69,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Alto Padrão,Porto Alegre,Santa Tereza,3,1,78,Não,603.45,,395291.48,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Econômico,Porto Alegre,Centro Histórico,3,0,55,Não,607.65,,334819.33,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Alto Padrão,Porto Alegre,Vila Nova,3,2,37,Não,333.22,,264498.31,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Studio Compacto,Porto Alegre,Passo D'Areia,4,2,71,Sim,501.87,,189414.54,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Alto Padrão,Porto Alegre,Petropolis,2,1,64,Não,554.22,,438620.47,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Econômico,Porto Alegre,Vila Nova,2,2,80,Sim,439.81,,231201.3,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Studio Compacto,Porto Alegre,Vila Nova,3,0,45,Sim,468.08,,227703.41,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Studio Compacto,Porto Alegre,Tristeza,4,2,69,Não,603.58,,206912.32,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Residencial Vista Sul,Porto Alegre,Passo D'Areia,4,0,70,Não,355.81,,402104.83,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Condomínio Jardim Europa,Porto Alegre,Tristeza,3,0,44,Não,371.08,,396114.5,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Condomínio Jardim Europa,Porto Alegre,Vila Nova,4,2,74,Não,327.29,,355923.36,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Condomínio Jardim Europa,Porto Alegre,Menino Deus,3,2,53,Sim,470.4,,292539.71,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Alto Padrão,Porto Alegre,Vila Nova,3,2,60,Não,433.61,,371387.77,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Studio Compacto,Porto Alegre,Passo D'Areia,4,0,46,Não,647.79,,306608.88,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Econômico,Porto Alegre,Santa Tereza,2,1,60,Sim,331.36,,294893.23,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Condomínio Jardim Europa,Porto Alegre,Azenha,4,1,55,Não,612.71,,400057.32,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Condomínio Jardim Europa,Porto Alegre,Santa Tereza,1,1,62,Sim,492.49,,413391.0,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png
+Venda,Apartamento Alto Padrão,Porto Alegre,Santa Tereza,3,2,47,Sim,515.88,,363282.65,PlantaTerreo-PortoIbiza.png;FachadaPortoIbiza.png;Piscina-PortoIbiza.png

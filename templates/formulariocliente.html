@@ -1,60 +1,92 @@
+<!-- templates/formulariocliente.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Formulário de Preferências do Cliente</title>
   <link rel="stylesheet" href="/static/style.css">
+  <style>
+    /* Para exibir as cards lado a lado */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1rem;
+      width: 220px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Informe suas preferências de imóvel </h1>
+  <h1 style="text-align:center;">Informe suas preferências de imóvel</h1>
 
-  <form method="POST">
-    <label for="tipo">Tipo:</label>
+  <form method="POST" style="max-width:400px;margin:0 auto;">
+    <label>Tipo:</label>
     <select name="tipo" required>
-      <option value="venda">Comprar</option>
       <option value="Aluguel">Alugar</option>
-    </select>
+      <option value="Venda">Comprar</option>
+    </select><br>
 
-    <label for="cidade">Cidade:</label>
-    <input type="text" name="cidade" required>
+    <label>Bairro:</label>
+    <input type="text" name="bairro" required><br>
 
-    <label for="bairro">Bairro:</label>
-    <input type="text" name="bairro" required>
+    <label>Preço Máx (R$):</label>
+    <input type="number" name="preco_max" required><br>
 
-    <label for="quartos">Mínimo de Quartos:</label>
-    <input type="number" name="quartos" required>
+    <label>Quartos Mínimos:</label>
+    <input type="number" name="quartos" required><br>
 
-    <label for="vagas">Mínimo de Vagas:</label>
-    <input type="number" name="vagas" required>
+    <label>
+      <input type="checkbox" name="aceita_pets"> Aceita Pets
+    </label><br>
 
-    <label for="area">Área mínima (m²):</label>
-    <input type="number" name="area" required>
-
-    <label for="aceita_pets">Aceita Pets:</label>
-    <input type="checkbox" name="aceita_pets"><br>
-
-    <button type="submit">Buscar Imóveis</button>
+    <button type="submit" style="width:100%;padding:0.75rem;background:#4CAF50;color:white;border:none;border-radius:6px;">
+      Buscar Imóveis
+    </button>
   </form>
 
-  {% if recomendacoes %}
-    <h2>Imóveis Recomendados:</h2>
-    {% for imovel in recomendacoes %}
-      <div class="card">
-        <h3>{{ imovel['titulo'] }}</h3>
-        <p><strong>Tipo:</strong> {{ imovel['tipo'] }}</p>
-        <p><strong>Cidade:</strong> {{ imovel['cidade'] }}</p>
-        <p><strong>Bairro:</strong> {{ imovel['bairro'] }}</p>
-        <p><strong>Quartos:</strong> {{ imovel['quartos'] }}</p>
-        <p><strong>Vagas:</strong> {{ imovel['vagas'] }}</p>
-        <p><strong>Área:</strong> {{ imovel['area'] }} m²</p>
-        <p><strong>Valor Condomínio:</strong> R$ {{ imovel['valor_condominio'] }}</p>
-        <p><strong>Valor Aluguel:</strong> R$ {{ imovel['valor_aluguel'] }}</p>
-        <p><strong>Valor Compra:</strong> R$ {{ imovel['valor_compra'] }}</p>
-        {% if imovel['fotos'] %}
-          <img src="/static/uploads/{{ imovel['fotos'].split(';')[0] }}" alt="Foto do imóvel">
-        {% endif %}
+  {% if recomendacoes is defined %}
+    {% if recomendacoes %}
+      <h2 style="text-align:center;margin-top:2rem;">Imóveis Recomendados:</h2>
+      <div class="cards">
+        {% for im in recomendacoes %}
+          <div class="card">
+            <h3>{{ im['titulo'] }}</h3>
+            <p><strong>Bairro:</strong> {{ im['bairro'] }}</p>
+            <p><strong>Quartos:</strong> {{ im['quartos'] }}</p>
+            <p><strong>Vagas:</strong> {{ im['vagas'] }}</p>
+            <p><strong>Área:</strong> {{ im['area'] }} m²</p>
+            <p><strong>Valor:</strong>
+              {% if im['tipo']=='Aluguel' %}
+                R$ {{ im['valor_aluguel'] }}
+              {% else %}
+                R$ {{ im['valor_compra'] }}
+              {% endif %}
+            </p>
+            <p><strong>Aceita Pets:</strong> {{ im['aceita_pets'] }}</p>
+            {% if im['fotos'] %}
+              <img src="/static/uploads/{{ im['fotos'].split(';')[0] }}" alt="Foto">
+            {% endif %}
+          </div>
+        {% endfor %}
       </div>
-    {% endfor %}
+    {% else %}
+      <p style="text-align:center;margin-top:2rem;">Nenhum imóvel encontrado com essas preferências.</p>
+    {% endif %}
   {% endif %}
 </body>
 </html>
